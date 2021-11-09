@@ -1,0 +1,5 @@
+# Ignore all .txt files as they are generated automatically, except for 
+# score-test.txt file as it is the source
+
+*.txt
+!score-test.txt
