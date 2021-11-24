@@ -15,9 +15,12 @@ soup = BeautifulSoup(response.text, 'lxml')
 # There is one major HTML element (div) which holds the hard rock songs list
 rock_songs = soup.find_all('h2')
 
-# iterate through the h2 tags list and get the text
-for song in rock_songs:
-    print(song.text)
+# Write to a txt file
+with open('../directory-handler/100-greatest-rock-songs-of-the-century-so-far.txt', 'w') as f:
+    # iterate through the h2 tags list and get the text
+    for song in rock_songs:
+        print(song.text)
+        f.write(song.text + '\n')
 
 # Get the pagination
 pagination = soup.find('div', class_='box article pagination internal current-prev-next navigation-sequential')
@@ -29,5 +32,9 @@ for i in anchor_list:
     response = requests.get(url)
     soup = BeautifulSoup(response.text, 'lxml')
     rock_songs = soup.find_all('h2')
-    for song in rock_songs:
-        print(song.text)
+    # Append remaining songs list in pagination to the existing txt file
+    with open('../directory-handler/100-greatest-rock-songs-of-the-century-so-far.txt', 'a') as f:
+        for song in rock_songs:
+            print(song.text)
+            f.write(song.text + '\n')
+        
