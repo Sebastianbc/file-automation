@@ -18,16 +18,11 @@ SUBDIRECTORIES = {
 # Identify the right subdirectory for the extension given
 def pickDirectory(format):
     for directory, extensions in SUBDIRECTORIES.items():
-        for extension in extensions:
-            # If the file format is within the values of the different keys in 
-            # SUBDIRECTORIES dictionary return its key
-            if extension == format:
-                return directory
-            # If the above condition is not met then return "others" to be taken as directory
-            else:
-                return "others"
-
-# print(pickDirectory(".dor"))
+        # If format is in extensions for the current directory then return directory
+        if format in extensions:
+            return directory
+    # If there is no extension that matches with the given format, then return an altrnative directory
+    return "others"
 
 # Take the file path in the directory, then create (if not exists) and move the 
 # file to the corresponding directory
